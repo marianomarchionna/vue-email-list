@@ -12,11 +12,14 @@ const app = new Vue(
             mails: []
         },
         mounted() {
+            let emails = [];
             for(let i = 0; i < 10; i++){
                 axios
                 .get('https://flynn.boolean.careers/exercises/api/random/mail')
                 .then((result) => {
-                    this.mails.push(result.data.response);
+                    emails.push(result.data.response);
+                    if(emails.length == 10)
+                        this.mails = emails;
                 });
             }
         }
